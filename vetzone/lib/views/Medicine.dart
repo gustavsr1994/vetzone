@@ -17,7 +17,6 @@ class _MedicineMenuState extends State<MedicineMenu> {
   List<DropdownMenuItem<Model>> _dropdownMenuItemsUnit = List();
   int _massPet, _dose, _concentration, _unit;
   Model _model;
-  List<Model> _listUnit = null;
 
   void initState() {
     super.initState();
@@ -198,7 +197,7 @@ class _MedicineMenuState extends State<MedicineMenu> {
                   ),
                   SizedBox(
                     height: ScreenUtil.instance
-                        .setHeight(MediaQuery.of(context).size.height / 3),
+                        .setHeight(20),
                   ),
                   Container(
                       margin: EdgeInsets.all(ScreenUtil.instance.setWidth(10)),

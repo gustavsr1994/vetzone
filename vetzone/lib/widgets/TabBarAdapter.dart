@@ -1,28 +1,25 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vetzone/views/Convert.dart';
 
-class TabBarAdapter extends StatefulWidget {
-  @override
-  _TabBarAdapterState createState() => _TabBarAdapterState();
+class TabBarAdapter extends StatelessWidget {
   List<String> title;
   BuildContext context;
   TabBarAdapter({this.title, this.context});
-}
 
-class _TabBarAdapterState extends State<TabBarAdapter> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context2) {
     ScreenUtil.instance = ScreenUtil(
       width: 400,
       height: 810,
       allowFontScaling: true,
     )..init(context);
-    
+
     final tabChild = <Widget>[];
-    for (var i = 0; i < widget.title.length; i++) {
+    for (var i = 0; i < title.length; i++) {
       tabChild.add(Tab(
-        text: widget.title[i],
+        text: title[i],
       ));
     }
 
@@ -38,6 +35,7 @@ class _TabBarAdapterState extends State<TabBarAdapter> {
       labelStyle: TextStyle(fontSize: ScreenUtil.instance.setSp(17)),
       labelColor: Theme.of(context).accentColor,
       tabs: tabChild,
+      
     );
   }
 }

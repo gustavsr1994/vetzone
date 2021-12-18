@@ -1,6 +1,15 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:vetzone/assets/common/constant/constant_string.dart';
+import 'package:vetzone/assets/common/style/color_palette.dart';
+import 'package:vetzone/assets/widget/card/card_custom.dart';
+import 'package:vetzone/models/Model.dart';
+import 'package:vetzone/providers/BirthProv.dart';
 import 'package:vetzone/widgets/DrawerNavigation.dart';
 import 'package:vetzone/widgets/HeaderTitle.dart';
+import 'package:intl/intl.dart';
 
 class BirthDateMenu extends StatefulWidget {
   @override
@@ -8,23 +17,131 @@ class BirthDateMenu extends StatefulWidget {
 }
 
 class _BirthDateMenuState extends State<BirthDateMenu> {
+  var titleStringCommon = TitleString();
+  var fieldStringCommon = FieldString();
+  var conditionStringCommon = ConditionString();
+  var colorPalettes = ColorPalettes();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  List<DropdownMenuItem<Model>> _dropdownMenuItemsType = List();
+  DateTime _marriageDate;
+  int _type;
+  Model _model;
+
+  void initState() {
+    super.initState();
+    Model.listTypePets().then((value) {
+      setState(() {
+        _dropdownMenuItemsType = [];
+        buildDropdownMenuItemsType(value);
+      });
+    });
+  }
+
+  void buildDropdownMenuItemsType(List types) {
+    for (Model type in types) {
+      _dropdownMenuItemsType.add(
+        DropdownMenuItem(
+          value: type,
+          child: Text(type.name),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColorDark,
-        title: HeaderTitle(
-          context: context,
-          title: 'Calculate Birth Date',
-        )
-      ),
-      body: SafeArea(
-        child: Container(
-          child: Text('Birth Date'),
+    return ChangeNotifierProvider<BirthProv>(
+      create: (context) => BirthProv(),
+      child: Scaffold(
+        appBar: AppBar(
+            backgroundColor: Theme.of(context).primaryColorDark,
+            title: HeaderTitle(
+              context: context,
+              title: titleStringCommon.BIRTH_DATE_TITLE,
+            )),
+        body: SafeArea(
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  
+                  Container(
+                      margin: EdgeInsets.all(8),
+                      padding: EdgeInsets.all(12),
+                      child: DropdownButton<Model>(
+                          hint: Text(fieldStringCommon.TYPE_PETS),
+                          isExpanded: true,
+                          value: _model,
+                          items: _dropdownMenuItemsType,
+                          onChanged: (value) {
+                            setState(() {
+                              _model = value;
+                              _type = value.id;
+                            });
+                          })),
+                  Container(
+                    margin: EdgeInsets.all(ScreenUtil.instance.setWidth(7)),
+                    child: Consumer<BirthProv>(
+                      builder: (context, valueAge, _) => DateTimeField(
+                        validator: (value) {
+                          if (value == null) {
+                            return conditionStringCommon.notifBlank;
+                          }
+                          // _startDate = value;
+                          return null;
+                        },
+                        style:
+                            TextStyle(fontSize: ScreenUtil.instance.setSp(17)),
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            filled: true,
+                            labelText: fieldStringCommon.MARRIED_DATE,
+                            hintStyle: TextStyle(
+                                color: Theme.of(context).primaryColor),
+                            errorStyle: TextStyle(
+                              color: Colors.redAccent[700],
+                            ), suffixIcon: Icon(Icons.calendar_today)),
+                        format: DateFormat('dd-MMM-yyyy'),
+                        textInputAction: TextInputAction.done,
+                        onChanged: (value) {
+                          valueAge.setBirth(_type, value);
+                        },
+                        onShowPicker: (context, currentValue) async {
+                          final date = await showDatePicker(
+                            context: context,
+                            firstDate: DateTime(1990),
+                            initialDate: DateTime(1994),
+                            lastDate: DateTime(DateTime.now().year),
+                            builder: (BuildContext context, Widget child) {
+                              return Theme(
+                                data: ThemeData.light(),
+                                child: child,
+                              );
+                            },
+                          );
+                          return date;
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: ScreenUtil.instance.setHeight(20),
+                  ),
+                  Consumer<BirthProv>(
+                      builder: (context, ageValue, _) => CardCustom(
+                            title: 'Output',
+                            result: ageValue.getResultBirth == null
+                                ? '0'
+                                : ageValue.getResultBirth,
+                          ))
+                ],
+              ),
+            ),
+          ),
         ),
+        drawer: DrawerNavigation(),
       ),
-      drawer: DrawerNavigation(),
     );
-  
   }
 }

@@ -96,7 +96,7 @@ class DrawerNavigation extends StatelessWidget {
                 data: IconThemeData(color: Theme.of(context).primaryColorDark),
                 child: Icon(FontAwesomeIcons.thermometer)),
             title: Text(
-              'Temperature',
+              'Convert',
               style: TextStyle(
                   color: Theme.of(context).primaryColorDark,
                   fontWeight: FontWeight.bold),
@@ -109,7 +109,7 @@ class DrawerNavigation extends StatelessWidget {
           ListTile(
             leading: IconTheme(
                 data: IconThemeData(color: Theme.of(context).primaryColorDark),
-                child: Icon(FontAwesomeIcons.weight)),
+                child: Icon(FontAwesomeIcons.balanceScale)),
             title: Text(
               'Calori',
               style: TextStyle(
