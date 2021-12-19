@@ -1,12 +1,11 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:vetzone/assets/common/constant/constant_string.dart';
 import 'package:vetzone/assets/common/style/color_palette.dart';
 import 'package:vetzone/assets/widget/card/card_custom.dart';
 import 'package:vetzone/models/Model.dart';
-import 'package:vetzone/providers/BirthProv.dart';
+import 'package:vetzone/statemanagement/providers/BirthProv.dart';
 import 'package:vetzone/widgets/DrawerNavigation.dart';
 import 'package:vetzone/widgets/HeaderTitle.dart';
 import 'package:intl/intl.dart';
@@ -22,8 +21,8 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
   var conditionStringCommon = ConditionString();
   var colorPalettes = ColorPalettes();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  List<DropdownMenuItem<Model>> _dropdownMenuItemsType = List();
-  DateTime _marriageDate;
+  List<DropdownMenuItem<Model>> _dropdownMenuItemsType = [];
+
   int _type;
   Model _model;
 
@@ -65,7 +64,6 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  
                   Container(
                       margin: EdgeInsets.all(8),
                       padding: EdgeInsets.all(12),
@@ -81,7 +79,7 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
                             });
                           })),
                   Container(
-                    margin: EdgeInsets.all(ScreenUtil.instance.setWidth(7)),
+                    margin: EdgeInsets.all(7),
                     child: Consumer<BirthProv>(
                       builder: (context, valueAge, _) => DateTimeField(
                         validator: (value) {
@@ -91,8 +89,7 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
                           // _startDate = value;
                           return null;
                         },
-                        style:
-                            TextStyle(fontSize: ScreenUtil.instance.setSp(17)),
+                        style: TextStyle(fontSize: 17),
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             filled: true,
@@ -101,7 +98,8 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
                                 color: Theme.of(context).primaryColor),
                             errorStyle: TextStyle(
                               color: Colors.redAccent[700],
-                            ), suffixIcon: Icon(Icons.calendar_today)),
+                            ),
+                            suffixIcon: Icon(Icons.calendar_today)),
                         format: DateFormat('dd-MMM-yyyy'),
                         textInputAction: TextInputAction.done,
                         onChanged: (value) {
@@ -126,7 +124,7 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
                     ),
                   ),
                   SizedBox(
-                    height: ScreenUtil.instance.setHeight(20),
+                    height: 20,
                   ),
                   Consumer<BirthProv>(
                       builder: (context, ageValue, _) => CardCustom(

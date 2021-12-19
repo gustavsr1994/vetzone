@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:vetzone/assets/common/style/color_palette.dart';
+import 'package:vetzone/statemanagement/controller/navigation_controller.dart';
 import 'package:vetzone/views/Age.dart';
 import 'package:vetzone/views/BirthDate.dart';
 import 'package:vetzone/views/Blood.dart';
@@ -10,6 +12,8 @@ import 'package:vetzone/views/MainMenu.dart';
 import 'package:vetzone/views/Medicine.dart';
 
 class DrawerNavigation extends StatelessWidget {
+  var menuNavController = Get.put(NavigationController());
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -21,31 +25,34 @@ class DrawerNavigation extends StatelessWidget {
               'Gustav Sri R',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).accentColor),
+                  color: ColorPalettes().accentColor),
             ),
             accountEmail: Text(
               'gustavr1994@gmail.com',
-              style: TextStyle(color: Theme.of(context).accentColor),
+              style: TextStyle(color: ColorPalettes().accentColor),
             ),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Theme.of(context).primaryColorDark,
               child: Icon(FontAwesomeIcons.userTie),
             ),
           ),
-          ListTile(
-            leading: IconTheme(
-                  data:
-                      IconThemeData(color: Theme.of(context).primaryColorDark),
-                  child: Icon(FontAwesomeIcons.babyCarriage)),
-            title: Text(
-              'Birth Date',
-              style: TextStyle(color: Theme.of(context).primaryColorDark,fontWeight: FontWeight.bold),
-            ),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => BirthDateMenu()));
-            },
-          ),
+          menuNavController.obx((state) => (ListTile(
+                selected: state == "Birth Date" ? true : false,
+                selectedTileColor: ColorPalettes().accentColor,
+                leading: IconTheme(
+                    data: IconThemeData(
+                        color: Theme.of(context).primaryColorDark),
+                    child: Icon(FontAwesomeIcons.babyCarriage)),
+                title: Text(
+                  'Birth Date',
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColorDark,
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: () {
+                  menuNavController.changeMenu('Birth Date');
+                },
+              ))),
           ListTile(
               leading: IconTheme(
                   data:
@@ -58,6 +65,7 @@ class DrawerNavigation extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               onTap: () {
+                menuNavController.changeMenu('Age');
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => AgeMenu()));
               }),

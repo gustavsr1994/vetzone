@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vetzone/assets/common/style/color_palette.dart';
 import 'package:vetzone/widgets/DrawerNavigation.dart';
 import 'package:vetzone/widgets/HeaderTitle.dart';
 import 'package:vetzone/widgets/TabBarAdapter.dart';
@@ -18,18 +18,11 @@ class _BloodMenuState extends State<BloodMenu> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
-      width: 400,
-      height: 810,
-      allowFontScaling: true,
-    )..init(context);
-
     return MaterialApp(
       theme: ThemeData(
           fontFamily: 'Poppins',
           primaryColorDark: Colors.blue[900],
-          primaryColor: Colors.lightBlue[800],
-          accentColor: Colors.yellow[500]),
+          primaryColor: Colors.lightBlue[800]),
       home: DefaultTabController(
           length: 3,
           child: Scaffold(
@@ -40,12 +33,12 @@ class _BloodMenuState extends State<BloodMenu> {
                 title: 'Charity Blood',
               ),
               bottom: PreferredSize(
-                preferredSize:
-                    Size.fromHeight(ScreenUtil.instance.setHeight(40)),
+                preferredSize: Size.fromHeight(40),
                 child: Theme(
-                  data: Theme.of(context).copyWith(accentColor: Theme.of(context).accentColor),
+                  data: Theme.of(context)
+                      .copyWith(accentColor: ColorPalettes().accentColor),
                   child: Container(
-                      height: ScreenUtil.instance.setHeight(48),
+                      height: 48,
                       child: TabBarAdapter(
                         context: context,
                         title: _listTitle,

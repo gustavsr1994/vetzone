@@ -3,13 +3,14 @@ import 'package:vetzone/assets/common/constant/constant_string.dart';
 import 'package:vetzone/assets/common/style/color_palette.dart';
 
 class CardCustom extends StatelessWidget {
-  var titleStringCommon = TitleString();
-  var fieldStringCommon = FieldString();
-  var conditionStringCommon = ConditionString();
-  var colorPalettes = ColorPalettes();
-  String title;
-  String result;
+  final String title;
+  final String result;
   CardCustom({this.title, this.result});
+
+  final titleStringCommon = TitleString();
+  final fieldStringCommon = FieldString();
+  final conditionStringCommon = ConditionString();
+  final colorPalettes = ColorPalettes();
 
   @override
   Widget build(BuildContext context) {

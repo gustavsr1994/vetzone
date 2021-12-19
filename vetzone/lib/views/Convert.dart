@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:vetzone/assets/common/style/color_palette.dart';
 import 'package:vetzone/models/Model.dart';
-import 'package:vetzone/providers/ConvertProv.dart';
+import 'package:vetzone/statemanagement/providers/ConvertProv.dart';
 import 'package:vetzone/widgets/DrawerNavigation.dart';
 import 'package:vetzone/widgets/HeaderTitle.dart';
 import 'package:vetzone/widgets/TabBarAdapter.dart';
@@ -18,7 +18,7 @@ class _ConvertMenuState extends State<ConvertMenu>
   List<String> _listTitle = ['Mass', 'Liquid', 'Temperature'];
   List<DropdownMenuItem<Model>> _dropdownMenuItemsMassaUnit,
       _dropdownMenuItemsLiquidUnit,
-      _dropdownMenuItemsTempUnit = List();
+      _dropdownMenuItemsTempUnit = [];
   int _variabel, _unit, _unit2 = 0;
   Model _model, _model2;
   int indexCurrent;
@@ -84,11 +84,6 @@ class _ConvertMenuState extends State<ConvertMenu>
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
-      width: 400,
-      height: 810,
-      allowFontScaling: true,
-    )..init(context);
     return ChangeNotifierProvider<ConvertProv>(
       create: (context) => ConvertProv(),
       child: MaterialApp(
@@ -107,13 +102,12 @@ class _ConvertMenuState extends State<ConvertMenu>
                     title: 'Convert',
                   ),
                   bottom: PreferredSize(
-                    preferredSize:
-                        Size.fromHeight(ScreenUtil.instance.setHeight(40)),
+                    preferredSize: Size.fromHeight(40),
                     child: Theme(
                       data: Theme.of(context)
-                          .copyWith(accentColor: Theme.of(context).accentColor),
+                          .copyWith(accentColor: ColorPalettes().accentColor),
                       child: Container(
-                          height: ScreenUtil.instance.setHeight(48),
+                          height: 48,
                           child: TabBarAdapter(
                             context: context,
                             title: _listTitle,
@@ -134,8 +128,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                               children: <Widget>[
                                 Container(
                                   width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.all(
-                                      ScreenUtil.instance.setWidth(10)),
+                                  margin: EdgeInsets.all(10),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -143,8 +136,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                                       Expanded(
                                         flex: 2,
                                         child: Container(
-                                          margin: EdgeInsets.all(
-                                              ScreenUtil.instance.setWidth(5)),
+                                          margin: EdgeInsets.all(5),
                                           child: TextFormField(
                                             validator: (value) {
                                               if (value.isEmpty) {
@@ -154,9 +146,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                                               return null;
                                             },
                                             keyboardType: TextInputType.number,
-                                            style: TextStyle(
-                                                fontSize: ScreenUtil.instance
-                                                    .setSp(17)),
+                                            style: TextStyle(fontSize: 17),
                                             cursorColor: Theme.of(context)
                                                 .primaryColorDark,
                                             decoration: InputDecoration(
@@ -175,9 +165,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                                       Expanded(
                                         flex: 1,
                                         child: Container(
-                                            margin: EdgeInsets.all(ScreenUtil
-                                                .instance
-                                                .setWidth(5)),
+                                            margin: EdgeInsets.all(5),
                                             child: Consumer<ConvertProv>(
                                               builder: (context, convertValue,
                                                       _) =>
@@ -211,8 +199,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                                   ),
                                 ),
                                 Container(
-                                    margin: EdgeInsets.all(
-                                        ScreenUtil.instance.setWidth(15)),
+                                    margin: EdgeInsets.all(15),
                                     child: Consumer<ConvertProv>(
                                       builder: (context, convertValue, _) =>
                                           DropdownButton<Model>(
@@ -234,19 +221,17 @@ class _ConvertMenuState extends State<ConvertMenu>
                                               }),
                                     )),
                                 SizedBox(
-                                  height: ScreenUtil.instance.setHeight(20),
+                                  height: 20,
                                 ),
                                 Container(
-                                    margin: EdgeInsets.all(
-                                        ScreenUtil.instance.setWidth(10)),
+                                    margin: EdgeInsets.all(10),
                                     child: Consumer<ConvertProv>(
                                       builder: (context, convertValue, _) =>
                                           Text(
                                         'Result : ' +
                                             convertValue.getResult.toString(),
                                         style: TextStyle(
-                                            fontSize:
-                                                ScreenUtil.instance.setSp(17),
+                                            fontSize: 17,
                                             fontWeight: FontWeight.bold,
                                             color: Theme.of(context)
                                                 .primaryColorDark),
@@ -266,8 +251,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                               children: <Widget>[
                                 Container(
                                   width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.all(
-                                      ScreenUtil.instance.setWidth(10)),
+                                  margin: EdgeInsets.all(10),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -275,8 +259,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                                       Expanded(
                                         flex: 2,
                                         child: Container(
-                                          margin: EdgeInsets.all(
-                                              ScreenUtil.instance.setWidth(5)),
+                                          margin: EdgeInsets.all(5),
                                           child: TextFormField(
                                             validator: (value) {
                                               if (value.isEmpty) {
@@ -286,9 +269,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                                               return null;
                                             },
                                             keyboardType: TextInputType.number,
-                                            style: TextStyle(
-                                                fontSize: ScreenUtil.instance
-                                                    .setSp(17)),
+                                            style: TextStyle(fontSize: 17),
                                             cursorColor: Theme.of(context)
                                                 .primaryColorDark,
                                             decoration: InputDecoration(
@@ -308,9 +289,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                                       Expanded(
                                         flex: 1,
                                         child: Container(
-                                            margin: EdgeInsets.all(ScreenUtil
-                                                .instance
-                                                .setWidth(5)),
+                                            margin: EdgeInsets.all(5),
                                             child: Consumer<ConvertProv>(
                                               builder: (context, convertValue,
                                                       _) =>
@@ -344,8 +323,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                                   ),
                                 ),
                                 Container(
-                                    margin: EdgeInsets.all(
-                                        ScreenUtil.instance.setWidth(15)),
+                                    margin: EdgeInsets.all(15),
                                     child: Consumer<ConvertProv>(
                                       builder: (context, convertValue, _) =>
                                           DropdownButton<Model>(
@@ -367,19 +345,17 @@ class _ConvertMenuState extends State<ConvertMenu>
                                               }),
                                     )),
                                 SizedBox(
-                                  height: ScreenUtil.instance.setHeight(20),
+                                  height: 20,
                                 ),
                                 Container(
-                                    margin: EdgeInsets.all(
-                                        ScreenUtil.instance.setWidth(10)),
+                                    margin: EdgeInsets.all(10),
                                     child: Consumer<ConvertProv>(
                                       builder: (context, convertValue, _) =>
                                           Text(
                                         'Result : ' +
                                             convertValue.getResult.toString(),
                                         style: TextStyle(
-                                            fontSize:
-                                                ScreenUtil.instance.setSp(17),
+                                            fontSize: 17,
                                             fontWeight: FontWeight.bold,
                                             color: Theme.of(context)
                                                 .primaryColorDark),

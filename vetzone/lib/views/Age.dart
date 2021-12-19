@@ -1,8 +1,7 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:vetzone/providers/AgeProv.dart';
+import 'package:vetzone/statemanagement/providers/AgeProv.dart';
 import 'package:vetzone/widgets/DrawerNavigation.dart';
 import 'package:vetzone/widgets/HeaderTitle.dart';
 import 'package:intl/intl.dart';
@@ -13,14 +12,8 @@ class AgeMenu extends StatefulWidget {
 }
 
 class _AgeMenuState extends State<AgeMenu> {
-  DateTime _birthDate;
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
-      width: 400,
-      height: 810,
-      allowFontScaling: true,
-    )..init(context);
     return ChangeNotifierProvider<AgeProv>(
       create: (context) => AgeProv(),
       child: Scaffold(
@@ -35,7 +28,7 @@ class _AgeMenuState extends State<AgeMenu> {
             child: Column(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.all(ScreenUtil.instance.setWidth(7)),
+                  margin: EdgeInsets.all(7),
                   child: Consumer<AgeProv>(
                     builder: (context, valueAge, _) => DateTimeField(
                       validator: (value) {
@@ -45,7 +38,7 @@ class _AgeMenuState extends State<AgeMenu> {
                         // _startDate = value;
                         return null;
                       },
-                      style: TextStyle(fontSize: ScreenUtil.instance.setSp(17)),
+                      style: TextStyle(fontSize: 17),
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           filled: true,
@@ -82,15 +75,15 @@ class _AgeMenuState extends State<AgeMenu> {
                   ),
                 ),
                 SizedBox(
-                  height: ScreenUtil.instance.setHeight(20),
+                  height: 20,
                 ),
                 Container(
-                    margin: EdgeInsets.all(ScreenUtil.instance.setWidth(10)),
+                    margin: EdgeInsets.all(10),
                     child: Consumer<AgeProv>(
                       builder: (context, ageValue, _) => Text(
                         ageValue.getResultAge.toString(),
                         style: TextStyle(
-                            fontSize: ScreenUtil.instance.setSp(17),
+                            fontSize: 17,
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).primaryColorDark),
                       ),
