@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vetzone/statemanagement/controller/navigation_controller.dart';
-import 'package:vetzone/views/BirthDate.dart';
 import 'package:vetzone/widgets/DrawerNavigation.dart';
 import 'package:vetzone/widgets/HeaderTitle.dart';
 
@@ -23,16 +22,13 @@ class _MainMenuState extends State<MainMenu> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColorDark,
-        title: HeaderTitle(
-          context: context,
-          title: 'Vet Zone',
-        ),
+        elevation: 2,
+        title: menuNavController.obx((state) => HeaderTitle(
+              context: context,
+              title: state!.titleMenu,
+            )),
       ),
-      body: SafeArea(
-        child: Container(
-          child: Text('Main Menu'),
-        ),
-      ),
+      body: menuNavController.obx((state) => state!.menuWidget),
       drawer: DrawerNavigation(),
     );
   }

@@ -10,7 +10,7 @@ class BloodMenu extends StatefulWidget {
 }
 
 class _BloodMenuState extends State<BloodMenu> {
-  List<String> _listTitle = null;
+  List<String>? _listTitle = null;
   void initState() {
     super.initState();
     _listTitle = ['Blood', 'Max Blood Donor', 'Eritrosit'];
@@ -19,49 +19,34 @@ class _BloodMenuState extends State<BloodMenu> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-          fontFamily: 'Poppins',
-          primaryColorDark: Colors.blue[900],
-          primaryColor: Colors.lightBlue[800]),
+      debugShowCheckedModeBanner: false,
       home: DefaultTabController(
           length: 3,
           child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).primaryColorDark,
-              title: HeaderTitle(
-                context: context,
-                title: 'Charity Blood',
-              ),
-              bottom: PreferredSize(
-                preferredSize: Size.fromHeight(40),
-                child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(accentColor: ColorPalettes().accentColor),
-                  child: Container(
-                      height: 48,
-                      child: TabBarAdapter(
-                        context: context,
-                        title: _listTitle,
-                      )),
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(50),
+              child: Container(
+                height: 70,
+                color: ColorPalettes().primaryDarkColor,
+                child: TabBarAdapter(
+                  context: context,
+                  title: _listTitle!,
                 ),
               ),
             ),
-            body: SafeArea(
-              child: TabBarView(
-                children: <Widget>[
-                  Container(
-                    child: Text('Blood'),
-                  ),
-                  Container(
-                    child: Text('Max Blood Donor'),
-                  ),
-                  Container(
-                    child: Text('Eritrosit'),
-                  ),
-                ],
-              ),
+            body: TabBarView(
+              children: <Widget>[
+                Container(
+                  child: Text('Blood'),
+                ),
+                Container(
+                  child: Text('Max Blood Donor'),
+                ),
+                Container(
+                  child: Text('Eritrosit'),
+                ),
+              ],
             ),
-            drawer: DrawerNavigation(),
           )),
     );
   }

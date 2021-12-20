@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Vet Zone',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: 'Poppins',
           primaryColorDark: ColorPalettes().primaryDarkColor,

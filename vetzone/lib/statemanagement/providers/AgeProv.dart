@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class AgeProv with ChangeNotifier {
   AgeProv();
-  String resultAge = null;
+  String? resultAge = "";
 
   void setAge(DateTime birthDate) {
     DateTime currentDate = DateTime.now();
@@ -24,8 +24,8 @@ class AgeProv with ChangeNotifier {
         ' months, ' +
         days.toString() +
         ' days';
-        notifyListeners();
+    notifyListeners();
   }
 
-  String get getResultAge => resultAge;
+  String get getResultAge => resultAge!;
 }

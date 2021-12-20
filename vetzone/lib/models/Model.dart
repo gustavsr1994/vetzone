@@ -2,7 +2,7 @@ class Model {
   int id;
   String name;
 
-  Model({this.id, this.name});
+  Model({required this.id, required this.name});
   factory Model.convertModel(Map<String, dynamic> object) {
     return Model(id: object['id'], name: object['name']);
   }
@@ -12,10 +12,7 @@ class Model {
     List<Model> list = <Model>[];
 
     for (int a = 0; a < _listUnit.length; a++) {
-      Model models = new Model();
-      models.id = a + 1;
-      models.name = _listUnit[a];
-      list.add(models);
+      list.add(Model(id: a + 1, name: _listUnit[a]));
     }
 
     return list;
@@ -32,10 +29,7 @@ class Model {
     List<Model> list = <Model>[];
 
     for (int a = 0; a < _listType.length; a++) {
-      Model models = new Model();
-      models.id = a + 1;
-      models.name = _listType[a];
-      list.add(models);
+      list.add(Model(id: a + 1, name: _listType[a]));
     }
 
     return list;
@@ -46,10 +40,7 @@ class Model {
     List<Model> list = <Model>[];
 
     for (int a = 0; a < _listUnit.length; a++) {
-      Model models = new Model();
-      models.id = a + 1;
-      models.name = _listUnit[a];
-      list.add(models);
+      list.add(Model(id: a + 1, name: _listUnit[a]));
     }
 
     return list;
@@ -60,10 +51,7 @@ class Model {
     List<Model> list = <Model>[];
 
     for (int a = 0; a < _listUnit.length; a++) {
-      Model models = new Model();
-      models.id = a + 1;
-      models.name = _listUnit[a];
-      list.add(models);
+      list.add(Model(id: a + 1, name: _listUnit[a]));
     }
 
     return list;
@@ -74,10 +62,7 @@ class Model {
     List<Model> list = <Model>[];
 
     for (int a = 0; a < _listUnit.length; a++) {
-      Model models = new Model();
-      models.id = a + 1;
-      models.name = _listUnit[a];
-      list.add(models);
+      list.add(Model(id: a + 1, name: _listUnit[a]));
     }
 
     return list;

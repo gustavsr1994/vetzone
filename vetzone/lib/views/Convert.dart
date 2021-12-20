@@ -16,13 +16,13 @@ class _ConvertMenuState extends State<ConvertMenu>
     with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   List<String> _listTitle = ['Mass', 'Liquid', 'Temperature'];
-  List<DropdownMenuItem<Model>> _dropdownMenuItemsMassaUnit,
+  List<DropdownMenuItem<Model>>? _dropdownMenuItemsMassaUnit,
       _dropdownMenuItemsLiquidUnit,
       _dropdownMenuItemsTempUnit = [];
-  int _variabel, _unit, _unit2 = 0;
-  Model _model, _model2;
-  int indexCurrent;
-  TabController _tabController;
+  int? _variabel, _unit, _unit2 = 0;
+  Model? _model, _model2;
+  int? indexCurrent;
+  TabController? _tabController;
 
   void initState() {
     super.initState();
@@ -45,7 +45,7 @@ class _ConvertMenuState extends State<ConvertMenu>
 
   void buildDropdownMenuItemsMassaUnit(List units) {
     for (Model unit in units) {
-      _dropdownMenuItemsMassaUnit.add(
+      _dropdownMenuItemsMassaUnit!.add(
         DropdownMenuItem(
           value: unit,
           child: Text(unit.name),
@@ -58,7 +58,7 @@ class _ConvertMenuState extends State<ConvertMenu>
 
   void buildDropdownMenuItemsLiquidUnit(List units) {
     for (Model unit in units) {
-      _dropdownMenuItemsLiquidUnit.add(
+      _dropdownMenuItemsLiquidUnit!.add(
         DropdownMenuItem(
           value: unit,
           child: Text(unit.name),
@@ -71,7 +71,7 @@ class _ConvertMenuState extends State<ConvertMenu>
 
   void buildDropdownMenuItemsTempUnit(List units) {
     for (Model unit in units) {
-      _dropdownMenuItemsTempUnit.add(
+      _dropdownMenuItemsTempUnit!.add(
         DropdownMenuItem(
           value: unit,
           child: Text(unit.name),
@@ -139,7 +139,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                                           margin: EdgeInsets.all(5),
                                           child: TextFormField(
                                             validator: (value) {
-                                              if (value.isEmpty) {
+                                              if (value!.isEmpty) {
                                                 return 'Please, fill this field';
                                               }
                                               _variabel = int.parse(value);
@@ -179,17 +179,17 @@ class _ConvertMenuState extends State<ConvertMenu>
                                                       onChanged: (value) {
                                                         setState(() {
                                                           _model = value;
-                                                          _unit = value.id;
+                                                          _unit = value!.id;
                                                         });
                                                         if (_unit2 != null) {
                                                           if (_formKey
-                                                              .currentState
+                                                              .currentState!
                                                               .validate()) {
                                                             convertValue
                                                                 .setConvertMassa(
-                                                                    _variabel,
-                                                                    _unit,
-                                                                    _unit2);
+                                                                    _variabel!,
+                                                                    _unit!,
+                                                                    _unit2!);
                                                           }
                                                         }
                                                       }),
@@ -211,12 +211,14 @@ class _ConvertMenuState extends State<ConvertMenu>
                                               onChanged: (value) {
                                                 setState(() {
                                                   _model2 = value;
-                                                  _unit2 = value.id;
+                                                  _unit2 = value!.id;
                                                 });
-                                                if (_formKey.currentState
+                                                if (_formKey.currentState!
                                                     .validate()) {
                                                   convertValue.setConvertMassa(
-                                                      _variabel, _unit, _unit2);
+                                                      _variabel!,
+                                                      _unit!,
+                                                      _unit2!);
                                                 }
                                               }),
                                     )),
@@ -262,7 +264,7 @@ class _ConvertMenuState extends State<ConvertMenu>
                                           margin: EdgeInsets.all(5),
                                           child: TextFormField(
                                             validator: (value) {
-                                              if (value.isEmpty) {
+                                              if (value!.isEmpty) {
                                                 return 'Please, fill this field';
                                               }
                                               _variabel = int.parse(value);
@@ -303,17 +305,17 @@ class _ConvertMenuState extends State<ConvertMenu>
                                                       onChanged: (value) {
                                                         setState(() {
                                                           _model = value;
-                                                          _unit = value.id;
+                                                          _unit = value!.id;
                                                         });
                                                         if (_unit2 != null) {
                                                           if (_formKey
-                                                              .currentState
+                                                              .currentState!
                                                               .validate()) {
                                                             convertValue
                                                                 .setConvertLiquid(
-                                                                    _variabel,
-                                                                    _unit,
-                                                                    _unit2);
+                                                                    _variabel!,
+                                                                    _unit!,
+                                                                    _unit2!);
                                                           }
                                                         }
                                                       }),
@@ -335,12 +337,14 @@ class _ConvertMenuState extends State<ConvertMenu>
                                               onChanged: (value) {
                                                 setState(() {
                                                   _model2 = value;
-                                                  _unit2 = value.id;
+                                                  _unit2 = value!.id;
                                                 });
-                                                if (_formKey.currentState
+                                                if (_formKey.currentState!
                                                     .validate()) {
                                                   convertValue.setConvertLiquid(
-                                                      _variabel, _unit, _unit2);
+                                                      _variabel!,
+                                                      _unit!,
+                                                      _unit2!);
                                                 }
                                               }),
                                     )),

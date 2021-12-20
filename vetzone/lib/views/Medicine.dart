@@ -15,8 +15,8 @@ class MedicineMenu extends StatefulWidget {
 class _MedicineMenuState extends State<MedicineMenu> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   List<DropdownMenuItem<Model>> _dropdownMenuItemsUnit = [];
-  int _massPet, _dose, _concentration, _unit;
-  Model _model;
+  int? _massPet, _dose, _concentration, _unit;
+  Model? _model;
 
   void initState() {
     super.initState();
@@ -58,7 +58,7 @@ class _MedicineMenuState extends State<MedicineMenu> {
                     margin: EdgeInsets.all(15),
                     child: TextFormField(
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return 'Please, fill this field';
                         }
                         _massPet = int.parse(value);
@@ -90,7 +90,7 @@ class _MedicineMenuState extends State<MedicineMenu> {
                             margin: EdgeInsets.all(5),
                             child: TextFormField(
                               validator: (value) {
-                                if (value.isEmpty) {
+                                if (value!.isEmpty) {
                                   return 'Please, fill this field';
                                 }
                                 _dose = int.parse(value);
@@ -123,7 +123,7 @@ class _MedicineMenuState extends State<MedicineMenu> {
                                   onChanged: (value) {
                                     setState(() {
                                       _model = value;
-                                      _unit = value.id;
+                                      _unit = value!.id;
                                     });
                                   })),
                         ),
@@ -134,7 +134,7 @@ class _MedicineMenuState extends State<MedicineMenu> {
                     margin: EdgeInsets.all(15),
                     child: TextFormField(
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return 'Please, fill this field';
                         }
                         _concentration = int.parse(value);
@@ -159,9 +159,9 @@ class _MedicineMenuState extends State<MedicineMenu> {
                     child: Consumer<MedicineProv>(
                       builder: (context, doseValue, _) => ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState.validate()) {
+                          if (_formKey.currentState!.validate()) {
                             doseValue.setMedicineDose(
-                                _massPet, _dose, _unit, _concentration);
+                                _massPet!, _dose!, _unit!, _concentration!);
                           }
                         },
                         style: ElevatedButton.styleFrom(

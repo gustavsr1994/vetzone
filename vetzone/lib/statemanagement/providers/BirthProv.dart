@@ -3,7 +3,7 @@ import 'package:vetzone/assets/common/utils/date_formatter.dart';
 
 class BirthProv with ChangeNotifier {
   BirthProv();
-  String birthDate;
+  String? birthDate = "";
   void setBirth(int type, DateTime marriageDate) {
     switch (type) {
       case 0:
@@ -38,5 +38,5 @@ class BirthProv with ChangeNotifier {
     // birthDate = marriageDate;
   }
 
-  String get getResultBirth => birthDate;
+  String get getResultBirth => birthDate!;
 }

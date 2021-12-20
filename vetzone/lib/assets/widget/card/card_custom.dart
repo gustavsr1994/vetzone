@@ -5,7 +5,7 @@ import 'package:vetzone/assets/common/style/color_palette.dart';
 class CardCustom extends StatelessWidget {
   final String title;
   final String result;
-  CardCustom({this.title, this.result});
+  CardCustom({required this.title, required this.result});
 
   final titleStringCommon = TitleString();
   final fieldStringCommon = FieldString();
@@ -21,7 +21,7 @@ class CardCustom extends StatelessWidget {
             padding: EdgeInsets.all(12),
             margin: EdgeInsets.all(8),
             decoration: BoxDecoration(
-                border: Border.all(color: colorPalettes.primaryDarkColor),
+                border: Border.all(color: colorPalettes.primaryDarkColor!),
                 borderRadius: BorderRadius.circular(10)),
             child: Text(
               result,

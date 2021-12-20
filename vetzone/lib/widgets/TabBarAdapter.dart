@@ -5,24 +5,26 @@ import 'package:vetzone/assets/common/style/color_palette.dart';
 class TabBarAdapter extends StatelessWidget {
   final List<String> title;
   final BuildContext context;
-  TabBarAdapter({this.title, this.context});
+  TabBarAdapter({required this.title, required this.context});
 
   @override
   Widget build(BuildContext context2) {
     final tabChild = <Widget>[];
     for (var i = 0; i < title.length; i++) {
       tabChild.add(Tab(
-        text: title[i],
+        child: Text(
+          title[i],
+          textAlign: TextAlign.center,
+        ),
       ));
     }
 
     return TabBar(
       indicatorColor: ColorPalettes().accentColor,
       indicatorSize: TabBarIndicatorSize.tab,
-      isScrollable: true,
       indicator: BubbleTabIndicator(
-        indicatorHeight: 35,
-        indicatorColor: Colors.blue[700],
+        indicatorHeight: 50,
+        indicatorColor: Colors.blue[700]!,
         tabBarIndicatorSize: TabBarIndicatorSize.tab,
       ),
       labelStyle: TextStyle(fontSize: 17),

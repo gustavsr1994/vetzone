@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class ConvertProv with ChangeNotifier {
   ConvertProv();
-  String result;
+  String? result;
   void setConvertMassa(int value, int unit1, int unit2) {
     switch (unit1) {
       case 1:
@@ -207,5 +207,5 @@ class ConvertProv with ChangeNotifier {
     notifyListeners();
   }
 
-  String get getResult => result;
+  String get getResult => result!;
 }
