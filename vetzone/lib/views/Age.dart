@@ -1,6 +1,8 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vetzone/assets/common/style/color_palette.dart';
+import 'package:vetzone/assets/widget/card/card_custom.dart';
 import 'package:vetzone/statemanagement/providers/AgeProv.dart';
 import 'package:intl/intl.dart';
 
@@ -17,9 +19,11 @@ class _AgeMenuState extends State<AgeMenu> {
       child: SafeArea(
         child: Form(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
                 margin: EdgeInsets.all(7),
+                padding: EdgeInsets.symmetric(vertical: 10),
                 child: Consumer<AgeProv>(
                   builder: (context, valueAge, _) => DateTimeField(
                     validator: (value) {
@@ -31,11 +35,16 @@ class _AgeMenuState extends State<AgeMenu> {
                     },
                     style: TextStyle(fontSize: 17),
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                                color: ColorPalettes().accentColor!)),
                         filled: true,
                         labelText: 'Birth Date*',
+                        labelStyle:
+                            TextStyle(color: ColorPalettes().primaryDarkColor!),
                         hintStyle:
-                            TextStyle(color: Theme.of(context).primaryColor),
+                            TextStyle(color: ColorPalettes().primaryDarkColor!),
                         errorStyle: TextStyle(
                           color: Colors.redAccent[700],
                         )),
@@ -68,17 +77,17 @@ class _AgeMenuState extends State<AgeMenu> {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                  margin: EdgeInsets.all(10),
-                  child: Consumer<AgeProv>(
-                    builder: (context, ageValue, _) => Text(
-                      ageValue.getResultAge.toString(),
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColorDark),
-                    ),
-                  )),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
+                  'Output',
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Consumer<AgeProv>(
+                  builder: (context, ageValue, _) => CardCustom(
+                        result: ageValue.getResultAge,
+                      ))
             ],
           ),
         ),

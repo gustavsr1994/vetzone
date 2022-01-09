@@ -20,15 +20,16 @@ class TabBarAdapter extends StatelessWidget {
     }
 
     return TabBar(
-      indicatorColor: ColorPalettes().accentColor,
       indicatorSize: TabBarIndicatorSize.tab,
       indicator: BubbleTabIndicator(
         indicatorHeight: 50,
-        indicatorColor: Colors.blue[700]!,
+        indicatorRadius: 10,
+        indicatorColor: ColorPalettes().accentColor!,
         tabBarIndicatorSize: TabBarIndicatorSize.tab,
       ),
+      unselectedLabelColor: ColorPalettes().accentColor,
       labelStyle: TextStyle(fontSize: 17),
-      labelColor: ColorPalettes().accentColor,
+      labelColor: ColorPalettes().primaryDarkColor,
       tabs: tabChild,
     );
   }

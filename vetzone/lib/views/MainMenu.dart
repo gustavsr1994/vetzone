@@ -22,7 +22,7 @@ class _MainMenuState extends State<MainMenu> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColorDark,
-        elevation: 2,
+        elevation: 0,
         title: menuNavController.obx((state) => HeaderTitle(
               context: context,
               title: state!.titleMenu,

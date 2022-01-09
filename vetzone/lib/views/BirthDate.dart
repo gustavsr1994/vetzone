@@ -53,6 +53,7 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
         key: _formKey,
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
                   margin: EdgeInsets.all(8),
@@ -81,15 +82,27 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
                     },
                     style: TextStyle(fontSize: 17),
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                                color: ColorPalettes().accentColor!)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                                color: ColorPalettes().accentColor!)),
                         filled: true,
                         labelText: fieldStringCommon.MARRIED_DATE,
+                        labelStyle:
+                            TextStyle(color: ColorPalettes().primaryDarkColor),
                         hintStyle:
-                            TextStyle(color: Theme.of(context).primaryColor),
+                            TextStyle(color: ColorPalettes().primaryDarkColor),
                         errorStyle: TextStyle(
                           color: Colors.redAccent[700],
                         ),
-                        suffixIcon: Icon(Icons.calendar_today)),
+                        suffixIcon: Icon(
+                          Icons.calendar_today,
+                          color: ColorPalettes().primaryDarkColor,
+                        )),
                     format: DateFormat('dd-MMM-yyyy'),
                     textInputAction: TextInputAction.done,
                     onChanged: (value) {
@@ -103,7 +116,10 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
                         lastDate: DateTime(DateTime.now().year),
                         builder: (BuildContext context, Widget? child) {
                           return Theme(
-                            data: ThemeData.light(),
+                            data: ThemeData.from(
+                                colorScheme: ColorScheme.light(
+                                    primary:
+                                        ColorPalettes().primaryDarkColor!)),
                             child: child!,
                           );
                         },
@@ -116,9 +132,15 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
               SizedBox(
                 height: 20,
               ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
+                  'Output',
+                  textAlign: TextAlign.left,
+                ),
+              ),
               Consumer<BirthProv>(
                   builder: (context, ageValue, _) => CardCustom(
-                        title: 'Output',
                         result: ageValue.getResultBirth,
                       ))
             ],

@@ -10,20 +10,8 @@ class CaloriMenu extends StatefulWidget {
 class _CaloriMenuState extends State<CaloriMenu> {
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColorDark,
-          title: HeaderTitle(
-            context: context,
-            title: 'Calculate Calori',
-          )),
-      body: SafeArea(
-        child: Container(
-          child: Text('Calori'),
-        ),
-      ),
-      drawer: DrawerNavigation(),
+    return Container(
+      child: Text('Calori'),
     );
-  
   }
 }

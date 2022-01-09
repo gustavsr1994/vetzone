@@ -15,6 +15,7 @@ class DrawerNavigation extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
+            decoration: BoxDecoration(color: ColorPalettes().primaryDarkColor),
             accountName: Text(
               'Gustav Sri R',
               style: TextStyle(
@@ -26,8 +27,11 @@ class DrawerNavigation extends StatelessWidget {
               style: TextStyle(color: ColorPalettes().accentColor),
             ),
             currentAccountPicture: CircleAvatar(
-              backgroundColor: Theme.of(context).primaryColorDark,
-              child: Icon(FontAwesomeIcons.userTie),
+              backgroundColor: ColorPalettes().accentColor,
+              child: Icon(
+                FontAwesomeIcons.userTie,
+                color: ColorPalettes().primaryDarkColor,
+              ),
             ),
           ),
           // ignore: sdk_version_ui_as_code
@@ -37,122 +41,28 @@ class DrawerNavigation extends StatelessWidget {
                       ? Icon(
                           Icons.star,
                           size: 25,
-                          color: ColorPalettes().primaryDarkColor,
+                          color: ColorPalettes().accentColor,
                         )
                       : SizedBox(),
                   leading: IconTheme(
                       data: IconThemeData(
-                          color: Theme.of(context).primaryColorDark),
+                        color: state.titleMenu == listMenu[index].titleMenu
+                            ? ColorPalettes().primaryColor
+                            : ColorPalettes().primaryDarkColor,
+                      ),
                       child: Icon(listMenu[index].iconMenu)),
                   title: Text(
                     listMenu[index].titleMenu,
                     style: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: state.titleMenu == listMenu[index].titleMenu
+                            ? ColorPalettes().accentColor
+                            : ColorPalettes().primaryDarkColor,
                         fontWeight: FontWeight.bold),
                   ),
                   onTap: () {
                     menuNavController.changeMenu(listMenu[index].titleMenu);
                   },
                 )))
-
-          // menuNavController.obx(
-          //   (state) => ListTile(
-          //       trailing: state.titleMenu == "Age"
-          //           ? Icon(
-          //               Icons.star,
-          //               size: 25,
-          //               color: ColorPalettes().primaryDarkColor,
-          //             )
-          //           : SizedBox(),
-          //       leading: IconTheme(
-          //           data: IconThemeData(
-          //               color: Theme.of(context).primaryColorDark),
-          //           child: Icon(FontAwesomeIcons.calendar)),
-          //       title: Text(
-          //         'Age',
-          //         style: TextStyle(
-          //             color: Theme.of(context).primaryColorDark,
-          //             fontWeight: FontWeight.bold),
-          //       ),
-          //       onTap: () {
-          //         menuNavController.changeMenu('Age');
-          //       }),
-          // ),
-          // ListTile(
-          //   leading: IconTheme(
-          //       data: IconThemeData(color: Theme.of(context).primaryColorDark),
-          //       child: Icon(FontAwesomeIcons.pills)),
-          //   title: Text(
-          //     'Medicine',
-          //     style: TextStyle(
-          //         color: Theme.of(context).primaryColorDark,
-          //         fontWeight: FontWeight.bold),
-          //   ),
-          //   onTap: () {
-          //     Navigator.of(context).push(MaterialPageRoute(
-          //         builder: (BuildContext context) => MedicineMenu()));
-          //   },
-          // ),
-          // ListTile(
-          //   leading: IconTheme(
-          //       data: IconThemeData(color: Theme.of(context).primaryColorDark),
-          //       child: Icon(FontAwesomeIcons.heartbeat)),
-          //   title: Text(
-          //     'Blood',
-          //     style: TextStyle(
-          //         color: Theme.of(context).primaryColorDark,
-          //         fontWeight: FontWeight.bold),
-          //   ),
-          //   onTap: () {
-          //     Navigator.of(context).push(MaterialPageRoute(
-          //         builder: (BuildContext context) => BloodMenu()));
-          //   },
-          // ),
-          // ListTile(
-          //   leading: IconTheme(
-          //       data: IconThemeData(color: Theme.of(context).primaryColorDark),
-          //       child: Icon(FontAwesomeIcons.thermometer)),
-          //   title: Text(
-          //     'Convert',
-          //     style: TextStyle(
-          //         color: Theme.of(context).primaryColorDark,
-          //         fontWeight: FontWeight.bold),
-          //   ),
-          //   onTap: () {
-          //     Navigator.of(context).push(MaterialPageRoute(
-          //         builder: (BuildContext context) => ConvertMenu()));
-          //   },
-          // ),
-          // ListTile(
-          //   leading: IconTheme(
-          //       data: IconThemeData(color: Theme.of(context).primaryColorDark),
-          //       child: Icon(FontAwesomeIcons.balanceScale)),
-          //   title: Text(
-          //     'Calori',
-          //     style: TextStyle(
-          //         color: Theme.of(context).primaryColorDark,
-          //         fontWeight: FontWeight.bold),
-          //   ),
-          //   onTap: () {
-          //     Navigator.of(context).push(MaterialPageRoute(
-          //         builder: (BuildContext context) => CaloriMenu()));
-          //   },
-          // ),
-          // ListTile(
-          //   leading: IconTheme(
-          //       data: IconThemeData(color: Theme.of(context).primaryColorDark),
-          //       child: Icon(FontAwesomeIcons.infoCircle)),
-          //   title: Text(
-          //     'About',
-          //     style: TextStyle(
-          //         color: Theme.of(context).primaryColorDark,
-          //         fontWeight: FontWeight.bold),
-          //   ),
-          //   onTap: () {
-          //     Navigator.of(context).push(MaterialPageRoute(
-          //         builder: (BuildContext context) => MainMenu()));
-          //   },
-          // ),
         ],
       ),
     );
