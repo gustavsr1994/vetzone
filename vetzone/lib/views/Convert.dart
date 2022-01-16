@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vetzone/assets/common/style/color_palette.dart';
+import 'package:vetzone/assets/widget/alert/alert_dialog_custom.dart';
 import 'package:vetzone/assets/widget/card/card_custom.dart';
 import 'package:vetzone/models/Model.dart';
 import 'package:vetzone/statemanagement/providers/ConvertProv.dart';
@@ -15,6 +16,7 @@ class _ConvertMenuState extends State<ConvertMenu>
     with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> formKeyMass = GlobalKey<FormState>();
   final GlobalKey<FormState> formKeyLiquid = GlobalKey<FormState>();
+  TextEditingController massaController = TextEditingController();
 
   List<String> _listTitle = ['Mass', 'Liquid'];
   List<DropdownMenuItem<Model>>? _dropdownMenuItemsMassaUnit,
@@ -113,7 +115,9 @@ class _ConvertMenuState extends State<ConvertMenu>
                                             _variabel = int.parse(value);
                                             return null;
                                           },
+                                          controller: massaController,
                                           keyboardType: TextInputType.number,
+                                          textInputAction: TextInputAction.next,
                                           style: TextStyle(fontSize: 17),
                                           cursorColor: Theme.of(context)
                                               .primaryColorDark,
@@ -153,10 +157,13 @@ class _ConvertMenuState extends State<ConvertMenu>
                                                         unitMassFrom = value;
                                                         _unit = value!.id;
                                                       });
-                                                      if (_unit2 != null) {
-                                                        if (formKeyMass
-                                                            .currentState!
-                                                            .validate()) {
+                                                      if (formKeyMass
+                                                          .currentState!
+                                                          .validate()) {
+                                                        if (_unit == null ||
+                                                            _unit2 == null) {
+                                                          showAlertError();
+                                                        } else {
                                                           convertValue
                                                               .setConvertMassa(
                                                                   _variabel!,
@@ -186,13 +193,60 @@ class _ConvertMenuState extends State<ConvertMenu>
                                               });
                                               if (formKeyMass.currentState!
                                                   .validate()) {
-                                                convertValue.setConvertMassa(
-                                                    _variabel!,
-                                                    _unit!,
-                                                    _unit2!);
+                                                if (_unit == null ||
+                                                    _unit2 == null) {
+                                                  showAlertError();
+                                                } else {
+                                                  convertValue.setConvertMassa(
+                                                      _variabel!,
+                                                      _unit!,
+                                                      _unit2!);
+                                                }
                                               }
                                             }),
                                   )),
+                              Container(
+                                margin: EdgeInsets.all(12),
+                                child: Consumer<ConvertProv>(
+                                  builder: (context, convertValue, _) =>
+                                      ElevatedButton(
+                                    onPressed: () {
+                                      if (formKeyMass.currentState!
+                                          .validate()) {
+                                        if (_unit == null || _unit2 == null) {
+                                          showAlertError();
+                                        } else {
+                                          convertValue.setConvertMassa(
+                                              _variabel!, _unit!, _unit2!);
+                                        }
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        primary:
+                                            ColorPalettes().primaryDarkColor!,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            side: BorderSide(
+                                                color: ColorPalettes()
+                                                    .primaryDarkColor!,
+                                                style: BorderStyle.solid))),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16),
+                                      child: Center(
+                                        child: Text(
+                                          "Calculate",
+                                          style: TextStyle(
+                                              color:
+                                                  ColorPalettes().accentColor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                               SizedBox(
                                 height: 20,
                               ),
@@ -279,10 +333,13 @@ class _ConvertMenuState extends State<ConvertMenu>
                                                         unitLiquidFrom = value;
                                                         _unit = value!.id;
                                                       });
-                                                      if (_unit2 != null) {
-                                                        if (formKeyLiquid
-                                                            .currentState!
-                                                            .validate()) {
+                                                      if (formKeyLiquid
+                                                          .currentState!
+                                                          .validate()) {
+                                                        if (_unit == null ||
+                                                            _unit2 == null) {
+                                                          showAlertError();
+                                                        } else {
                                                           convertValue
                                                               .setConvertLiquid(
                                                                   _variabel!,
@@ -312,13 +369,60 @@ class _ConvertMenuState extends State<ConvertMenu>
                                               });
                                               if (formKeyLiquid.currentState!
                                                   .validate()) {
-                                                convertValue.setConvertLiquid(
-                                                    _variabel!,
-                                                    _unit!,
-                                                    _unit2!);
+                                                if (_unit == null ||
+                                                    _unit2 == null) {
+                                                  showAlertError();
+                                                } else {
+                                                  convertValue.setConvertLiquid(
+                                                      _variabel!,
+                                                      _unit!,
+                                                      _unit2!);
+                                                }
                                               }
                                             }),
                                   )),
+                              Container(
+                                margin: EdgeInsets.all(12),
+                                child: Consumer<ConvertProv>(
+                                  builder: (context, convertValue, _) =>
+                                      ElevatedButton(
+                                    onPressed: () {
+                                      if (formKeyLiquid.currentState!
+                                          .validate()) {
+                                        if (_unit == null || _unit2 == null) {
+                                          showAlertError();
+                                        } else {
+                                          convertValue.setConvertLiquid(
+                                              _variabel!, _unit!, _unit2!);
+                                        }
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        primary:
+                                            ColorPalettes().primaryDarkColor!,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            side: BorderSide(
+                                                color: ColorPalettes()
+                                                    .primaryDarkColor!,
+                                                style: BorderStyle.solid))),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16),
+                                      child: Center(
+                                        child: Text(
+                                          "Calculate",
+                                          style: TextStyle(
+                                              color:
+                                                  ColorPalettes().accentColor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                               SizedBox(
                                 height: 20,
                               ),
@@ -343,5 +447,15 @@ class _ConvertMenuState extends State<ConvertMenu>
                 ),
               ))),
     );
+  }
+
+  Future<void> showAlertError() {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialogCustom(
+              title: 'Error', descError: 'You mush choice unit for dose');
+        });
   }
 }

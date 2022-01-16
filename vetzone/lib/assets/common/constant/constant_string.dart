@@ -46,27 +46,30 @@ class HistoryWorkString {
     HistoryWorkModel(
         placeWork: 'PT Prambanan Kencana',
         periodWork: 'Mar 2018 - Dec 2020',
-        techUseWork:
-            'Fullstack Dev \nAndroid Native, ASP.Net, SQL Server, Flutter',
+        title: 'As Fullstack Dev',
+        techUseWork: 'Android Native, ASP.Net, SQL Server, Flutter',
         projectWork: 'HRMS Web and Mobile, SCS(Sales Canvasing System)',
-        jobDesc: 'Develop and maintenance application'),
+        jobDesc: 'Design database, UI, develop and maintenance application'),
     HistoryWorkModel(
         placeWork: 'PT Inet Global Indo',
         periodWork: 'Jan 2021 - Mar 2021',
-        techUseWork: 'Mobile Dev \nFlutter',
+        title: 'As Mobile Dev',
+        techUseWork: 'Flutter',
         projectWork: 'Fastlab Ios',
         jobDesc: 'Develop and upload application to Apple Store'),
     HistoryWorkModel(
         placeWork: 'PT Adi Consultant',
         periodWork: 'Apr 2021 - Sep 2021',
-        techUseWork: 'Mobile Dev \nFlutter',
+        title: 'As Mobile Dev',
+        techUseWork: 'Flutter',
         projectWork: 'Vega',
         jobDesc:
             'Placement in project at Sinarmas Insurance. Develop application'),
     HistoryWorkModel(
         placeWork: 'PT Keindahan Sejahtera Hutama',
         periodWork: 'Oct 2021 - Now',
-        techUseWork: 'Mobile Dev, Backend End \nFlutter, Golang, AWS',
+        title: 'As Mobile Dev, Backend End',
+        techUseWork: 'Flutter, Golang, AWS',
         projectWork: 'Unnis App',
         jobDesc: 'Develop application, create server')
   ];
@@ -75,6 +78,7 @@ class HistoryWorkString {
 class HistoryWorkModel {
   String placeWork;
   String periodWork;
+  String title;
   String techUseWork;
   String projectWork;
   String jobDesc;
@@ -82,6 +86,7 @@ class HistoryWorkModel {
   HistoryWorkModel(
       {required this.placeWork,
       required this.periodWork,
+      required this.title,
       required this.techUseWork,
       required this.projectWork,
       required this.jobDesc});

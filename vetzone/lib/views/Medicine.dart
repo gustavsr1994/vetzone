@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:vetzone/assets/common/style/color_palette.dart';
+import 'package:vetzone/assets/widget/alert/alert_dialog_custom.dart';
 import 'package:vetzone/assets/widget/card/card_custom.dart';
 import 'package:vetzone/models/Model.dart';
 import 'package:vetzone/statemanagement/providers/MedicineProv.dart';
-import 'package:vetzone/widgets/DrawerNavigation.dart';
-import 'package:vetzone/widgets/HeaderTitle.dart';
 
 class MedicineMenu extends StatefulWidget {
   @override
@@ -18,6 +18,9 @@ class _MedicineMenuState extends State<MedicineMenu> {
   List<DropdownMenuItem<Model>> _dropdownMenuItemsUnit = [];
   int? _massPet, _dose, _concentration, _unit;
   Model? _model;
+  FocusNode massPetFocus = FocusNode();
+  FocusNode doseFocus = FocusNode();
+  FocusNode concentrateFocus = FocusNode();
 
   void initState() {
     super.initState();
@@ -60,8 +63,14 @@ class _MedicineMenuState extends State<MedicineMenu> {
                       return null;
                     },
                     keyboardType: TextInputType.number,
+                    focusNode: massPetFocus,
+                    textInputAction: TextInputAction.next,
                     style: TextStyle(fontSize: 17),
                     cursorColor: Theme.of(context).primaryColorDark,
+                    onFieldSubmitted: (value) {
+                      massPetFocus.unfocus();
+                      FocusScope.of(context).requestFocus(doseFocus);
+                    },
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -95,8 +104,15 @@ class _MedicineMenuState extends State<MedicineMenu> {
                               return null;
                             },
                             keyboardType: TextInputType.number,
+                            focusNode: doseFocus,
+                            textInputAction: TextInputAction.next,
                             style: TextStyle(fontSize: 17),
                             cursorColor: Theme.of(context).primaryColorDark,
+                            onFieldSubmitted: (value) {
+                              doseFocus.unfocus();
+                              FocusScope.of(context)
+                                  .requestFocus(concentrateFocus);
+                            },
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -142,8 +158,13 @@ class _MedicineMenuState extends State<MedicineMenu> {
                       return null;
                     },
                     keyboardType: TextInputType.number,
+                    focusNode: concentrateFocus,
+                    textInputAction: TextInputAction.done,
                     style: TextStyle(fontSize: 17),
                     cursorColor: Theme.of(context).primaryColorDark,
+                    onFieldSubmitted: (value) {
+                      concentrateFocus.unfocus();
+                    },
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -164,8 +185,12 @@ class _MedicineMenuState extends State<MedicineMenu> {
                     builder: (context, doseValue, _) => ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          doseValue.setMedicineDose(
-                              _massPet!, _dose!, _unit!, _concentration!);
+                          if (_unit == null) {
+                            showAlertError();
+                          } else {
+                            doseValue.setMedicineDose(
+                                _massPet!, _dose!, _unit!, _concentration!);
+                          }
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -182,6 +207,7 @@ class _MedicineMenuState extends State<MedicineMenu> {
                             "Calculate",
                             style: TextStyle(
                                 color: ColorPalettes().accentColor,
+                                fontWeight: FontWeight.bold,
                                 fontSize: 20),
                           ),
                         ),
@@ -209,5 +235,15 @@ class _MedicineMenuState extends State<MedicineMenu> {
         ),
       ),
     );
+  }
+
+  Future<void> showAlertError() {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialogCustom(
+              title: 'Error', descError: 'You mush choice unit for dose');
+        });
   }
 }

@@ -1,8 +1,10 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:vetzone/assets/common/constant/constant_string.dart';
 import 'package:vetzone/assets/common/style/color_palette.dart';
+import 'package:vetzone/assets/widget/alert/alert_dialog_custom.dart';
 import 'package:vetzone/assets/widget/card/card_custom.dart';
 import 'package:vetzone/models/Model.dart';
 import 'package:vetzone/statemanagement/providers/BirthProv.dart';
@@ -18,6 +20,7 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
   var fieldStringCommon = FieldString();
   var conditionStringCommon = ConditionString();
   var colorPalettes = ColorPalettes();
+  var birthDate = DateTime.now();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   List<DropdownMenuItem<Model>> _dropdownMenuItemsType = [];
 
@@ -57,18 +60,29 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
             children: <Widget>[
               Container(
                   margin: EdgeInsets.all(8),
-                  padding: EdgeInsets.all(12),
-                  child: DropdownButton<Model>(
-                      hint: Text(fieldStringCommon.TYPE_PETS),
-                      isExpanded: true,
-                      value: _model,
-                      items: _dropdownMenuItemsType,
-                      onChanged: (value) {
-                        setState(() {
-                          _model = value;
-                          _type = value!.id;
-                        });
-                      })),
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Type Pet',
+                        style: TextStyle(
+                            color: colorPalettes.primaryDarkColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      DropdownButton<Model>(
+                          hint: Text(fieldStringCommon.TYPE_PETS),
+                          isExpanded: true,
+                          value: _model,
+                          items: _dropdownMenuItemsType,
+                          onChanged: (value) {
+                            setState(() {
+                              _model = value;
+                              _type = value!.id;
+                            });
+                          }),
+                    ],
+                  )),
               Container(
                 margin: EdgeInsets.all(7),
                 child: Consumer<BirthProv>(
@@ -106,7 +120,10 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
                     format: DateFormat('dd-MMM-yyyy'),
                     textInputAction: TextInputAction.done,
                     onChanged: (value) {
-                      valueAge.setBirth(_type!, value!);
+                      setState(() {
+                        birthDate = value!;
+                      });
+                      // valueAge.setBirth(_type!, value!);
                     },
                     onShowPicker: (context, currentValue) async {
                       final date = await showDatePicker(
@@ -129,6 +146,41 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
                   ),
                 ),
               ),
+              Container(
+                margin: EdgeInsets.all(12),
+                child: Consumer<BirthProv>(
+                  builder: (context, valueAge, _) => ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        if (birthDate == null) {
+                          showAlertError();
+                        } else {
+                          valueAge.setBirth(_type!, birthDate);
+                        }
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        primary: ColorPalettes().primaryDarkColor!,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(
+                                color: ColorPalettes().primaryDarkColor!,
+                                style: BorderStyle.solid))),
+                    child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Center(
+                        child: Text(
+                          "Calculate",
+                          style: TextStyle(
+                              color: ColorPalettes().accentColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -148,5 +200,15 @@ class _BirthDateMenuState extends State<BirthDateMenu> {
         ),
       ),
     );
+  }
+
+  Future<void> showAlertError() {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialogCustom(
+              title: 'Error', descError: 'You mush choice unit for dose');
+        });
   }
 }

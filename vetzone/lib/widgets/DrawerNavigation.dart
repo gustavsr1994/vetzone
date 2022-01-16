@@ -40,7 +40,7 @@ class DrawerNavigation extends StatelessWidget {
                   trailing: state!.titleMenu == listMenu[index].titleMenu
                       ? Icon(
                           Icons.star,
-                          size: 25,
+                          size: 20,
                           color: ColorPalettes().accentColor,
                         )
                       : SizedBox(),

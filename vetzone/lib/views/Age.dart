@@ -47,6 +47,10 @@ class _AgeMenuState extends State<AgeMenu> {
                             TextStyle(color: ColorPalettes().primaryDarkColor!),
                         errorStyle: TextStyle(
                           color: Colors.redAccent[700],
+                        ),
+                        suffixIcon: Icon(
+                          Icons.calendar_today,
+                          color: ColorPalettes().primaryDarkColor,
                         )),
                     format: DateFormat('dd-MMM-yyyy'),
                     textInputAction: TextInputAction.done,
@@ -64,7 +68,10 @@ class _AgeMenuState extends State<AgeMenu> {
                         lastDate: DateTime(DateTime.now().year),
                         builder: (BuildContext context, Widget? child) {
                           return Theme(
-                            data: ThemeData.light(),
+                            data: ThemeData.from(
+                                colorScheme: ColorScheme.light(
+                                    primary:
+                                        ColorPalettes().primaryDarkColor!)),
                             child: child!,
                           );
                         },
