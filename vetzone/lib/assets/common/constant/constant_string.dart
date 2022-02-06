@@ -100,3 +100,43 @@ class FieldString {
 class ConditionString {
   String notifBlank = "Please, fill this field";
 }
+
+List<String> typePets = ["Select One", "Anjing", "Kucing"];
+List<String> statDog = [
+  "Select Activity",
+  "Resting/Hospitalised",
+  "Aktif (<1 jam/hari)",
+  "Aktif (1-3 jam/hari)",
+  "Aktif (Ekstrem)",
+  "Dewasa (1-2 Tahun)",
+  "Dewasa (3-7 Tahun)",
+  "Hamil (4 minggu pertama)",
+  "Hamil (5 minggu terakhir)",
+  "Pertumbuhan (Puppy)",
+  "Pertumbuhan (<50% BB Dewasa)",
+  "Pertumbuhan (50-80% BB Dewasa)",
+  "Pertumbuhan (80-100% BB Dewasa)",
+  "Laktasi (Minggu 1)",
+  "Laktasi (Minggu 2)",
+  "Laktasi (Minggu 3)",
+  "Laktasi (Minggu 4)",
+  "Obesitas"
+];
+List<String> statCat = [
+  "Select Activity",
+  "Resting/Hospitalised",
+  "Aktif",
+  "Hamil",
+  "Pertumbuhan (< 4 bulan)",
+  "Pertumbuhan (4-9 bulan)",
+  "Pertumbuhan (9-12 bulan)",
+  "Di Dalam Rumah",
+  "Laktasi (Minggu 1)",
+  "Laktasi (Minggu 2)",
+  "Laktasi (Minggu 3)",
+  "Laktasi (Minggu 4)",
+  "Laktasi (Minggu 5)",
+  "Laktasi (Minggu 6)",
+  "Laktasi (Minggu 7)",
+  "Dikebiri"
+];
